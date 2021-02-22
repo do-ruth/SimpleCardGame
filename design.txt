@@ -1,0 +1,11 @@
+Simple Card Game
+
+Aspects:
+  User vs System Game
+  One by one a card will be drawn on both sides, highest card wins the round.
+  Whoever won the most rounds wins the game
+
+User input:
+  String for "ready" to let the system know to draw cards???
+
+Test case:
