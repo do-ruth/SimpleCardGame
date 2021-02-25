@@ -41,6 +41,7 @@ public class cardGame {
         ArrayList<String> systemDeckFullString = new ArrayList<String>();
         ArrayList<String> userDeckFullString = new ArrayList<String>();
 
+        //assigning suit
         int systemDeckSuiteCounter = 1;
         while (systemDeckSuiteCounter < 11) {
             int suiteValue = rand.nextInt(4) + 1;
@@ -60,8 +61,7 @@ public class cardGame {
             systemDeckSuiteCounter++;
         }
 
-        //System.out.println("System Deck Suite: " + systemDeckSuiteString);
-
+        //assigning suit
         int userDeckSuiteCounter = 1;
         while (userDeckSuiteCounter < 11) {
             int suiteValue = rand.nextInt(4) + 1;
@@ -81,8 +81,7 @@ public class cardGame {
             userDeckSuiteCounter++;
         }
 
-        //System.out.println("User Deck Suite: " + userDeckSuiteString);
-
+        //changing 11 to Jack, etc. and assigning card value
         int systemDeckCounter = 1;
         while (systemDeckCounter < 11) {
             int cardValue = rand.nextInt(13) + 1;
@@ -104,8 +103,8 @@ public class cardGame {
             }
             systemDeckCounter++;
         }
-        //System.out.println("System's Deck: " + systemDeckString);
 
+        //changing 11 to Jack, etc. and assigning card value
         int userDeckCounter = 1;
         while (userDeckCounter < 11) {
             int cardValue = rand.nextInt(13) + 1;
@@ -129,13 +128,14 @@ public class cardGame {
         }
         //System.out.println(name + "'s Deck: " + userDeckString);
 
+        //making array of the deck number/face and suit for system
         int systemDeckFullCounter = 0;
         while (systemDeckFullCounter < 10) {
             systemDeckFullString.add(systemDeckString.get(systemDeckFullCounter) + " " + systemDeckSuiteString.get(systemDeckFullCounter));
             systemDeckFullCounter++;
         }
 
-
+        //making array of the deck number/face and suit for user
         int userDeckFullCounter = 0;
         while (userDeckFullCounter < 10) {
             userDeckFullString.add(userDeckString.get(userDeckFullCounter) + " " + userDeckSuiteString.get(userDeckFullCounter));
@@ -146,6 +146,7 @@ public class cardGame {
         int systemPoints = 0;
         int userPoints = 0;
 
+        //requiring enter key to be pressed to advance to next round
         int pointCounter = 0;
         while (pointCounter < 10) {
 
@@ -165,8 +166,11 @@ public class cardGame {
                 }
             }
 
+            //if system or user draw an ACE
             if (systemDeck.get(pointCounter) == 1 || userDeck.get(pointCounter) == 1) {
+                //if both draw an ACE
                 if (userDeck.get(pointCounter) == 1 && systemDeck.get(pointCounter) == 1) {
+                    //check for system suit lower than user suit
                     if (systemDeckSuiteInt.get(pointCounter) < userDeckSuiteInt.get(pointCounter)) {
                         userPoints++;
                         System.out.println("System's Card: " + systemDeckFullString.get(pointCounter));
@@ -175,6 +179,7 @@ public class cardGame {
                         System.out.println("System's points: " + systemPoints);
                         System.out.println(name + "'s points: " + userPoints);
                     }
+                    //check if both suit the same
                     else if (systemDeckSuiteInt.get(pointCounter) == userDeckSuiteInt.get(pointCounter)) {
                         systemPoints++;
                         userPoints++;
@@ -184,6 +189,7 @@ public class cardGame {
                         System.out.println("System's points: " + systemPoints);
                         System.out.println(name + "'s points: " + userPoints);
                     }
+                    //otherwise, system suit is higher and gains a point
                     else {
                         systemPoints++;
                         System.out.println("System's Card: " + systemDeckFullString.get(pointCounter));
@@ -193,6 +199,7 @@ public class cardGame {
                         System.out.println(name + "'s points: " + userPoints);
                     }
                 }
+                //check if user didn't draw an ace, user loses round
                 else if (userDeck.get(pointCounter) != 1 && systemDeck.get(pointCounter) == 1){
                     systemPoints++;
                     System.out.println("System's Card: " + systemDeckFullString.get(pointCounter));
@@ -201,6 +208,7 @@ public class cardGame {
                     System.out.println("System's points: " + systemPoints);
                     System.out.println(name + "'s points: " + userPoints);
                 }
+                //check if system didn't draw an ACE, system loses round
                 else if (userDeck.get(pointCounter) == 1 && systemDeck.get(pointCounter) != 1) {
                     userPoints++;
                     System.out.println("System's Card: " + systemDeckFullString.get(pointCounter));
@@ -210,6 +218,7 @@ public class cardGame {
                     System.out.println(name + "'s points: " + userPoints);
                 }
             }
+            //check if system card value is less than user card value
             else if (systemDeck.get(pointCounter) < userDeck.get(pointCounter)) {
                 userPoints++;
                 System.out.println("System's Card: " + systemDeckFullString.get(pointCounter));
@@ -218,7 +227,9 @@ public class cardGame {
                 System.out.println("System's points: " + systemPoints);
                 System.out.println(name + "'s points: " + userPoints);
             }
+            //check if both card values are equivalent
             else if (systemDeck.get(pointCounter) == userDeck.get(pointCounter)) {
+                //checking suit of the cards
                 if (systemDeckSuiteInt.get(pointCounter) < userDeckSuiteInt.get(pointCounter)) {
                     userPoints++;
                     System.out.println("System's Card: " + systemDeckFullString.get(pointCounter));
@@ -227,7 +238,8 @@ public class cardGame {
                     System.out.println("System's points: " + systemPoints);
                     System.out.println(name + "'s points: " + userPoints);
                 }
-                // here, if there is a tie with the number and the suit then both sides get a point
+                // here, if there is a tie with the number and the suit then both sides get a point (cards are not mutually exclusive
+                //i.e. the same card can be drawn for both sides
                 else if (systemDeckSuiteInt.get(pointCounter) == userDeckSuiteInt.get(pointCounter)){
                     systemPoints++;
                     userPoints++;
@@ -238,6 +250,7 @@ public class cardGame {
                     System.out.println(name + "'s points: " + userPoints);
 
                 }
+                //if all "if" cases fail then the system wins round
                 else {
                     systemPoints++;
                     System.out.println("System's Card: " + systemDeckFullString.get(pointCounter));
@@ -247,6 +260,7 @@ public class cardGame {
                     System.out.println(name + "'s points: " + userPoints);
                 }
             }
+            //if all "if" cases fail then the system wins round
             else {
                 systemPoints++;
                 System.out.println("System's Card: " + systemDeckFullString.get(pointCounter));
@@ -258,14 +272,7 @@ public class cardGame {
             pointCounter++;
         }
 
-        //int systemDeckCounter = 1;
-        //while (systemDeckCounter < 11) {
-        //    if (systemDeck.get(systemDeckCounter) == 1) {
-        //
-        //    }
-        //    systemDeckCounter++;
-        //}
-
+        //end message for game
         System.out.println(" ");
         System.out.println("The game is done. Here are all of the cards faced up.");
         System.out.println("System's Cards: " + systemDeckFullString);
